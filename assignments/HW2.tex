@@ -1,0 +1,476 @@
+\documentclass[12pt, letterpaper]{scrartcl}
+
+
+\usepackage{fullpage} % Set margins and place page numbers at bottom center
+\usepackage[shortlabels]{enumitem} % Use a. in the enumerate
+\usepackage{amsmath} % aligned equations
+\usepackage{graphicx} % include figure
+\usepackage{float} % usage of H for figure float
+\usepackage{amssymb} % \blacksqure
+\usepackage{xhfill} % fill horizontal line
+
+\usepackage{colortbl}
+\usepackage{xcolor} % colors
+\usepackage{sectsty} % section coloring
+\usepackage{setspace}
+\usepackage{bm}
+\onehalfspacing
+\sectionfont{\color{blue}}  % sets colour of sections
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MY COMMANDS                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\Real}{\mathcal{Re}}
+\newcommand{\poly}{\mathcal{P}}
+\newcommand{\mat}{\mathcal{M}}
+\DeclareMathOperator{\Span}{span}
+\newcommand{\Hom}{\mathcal{L}}
+\DeclareMathOperator{\Null}{null}
+\DeclareMathOperator{\Range}{range}
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\restr}[1]{|_{#1}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+
+
+\begin{document}
+
+% ### Header - start ###
+\begin{center}
+    \hrule
+    \vspace{0.4cm}
+    { \textbf{{\large Homework 2}} \\ MATH 564 --- Intermediate Differential Equations}
+\end{center}
+{ Name: \textbf{Ali Zafari} \hspace{\fill} Fall 2023 } \newline\hrule
+% ### Header - end ###
+% \section*{Exercises to be Considered \xrfill[2pt]{3pt}[blue]}
+% \begin{itemize}[-]
+%     \item 2.5.17
+%     \item 2.5.20
+%     \item 2.6.7
+% \end{itemize}
+% \vskip1mm\hrule
+
+\section*{2.5 Linear Systems with Constant Coefficients \xrfill[2pt]{3pt}[blue]}
+
+\subsubsection*{Exercise 2.5.15}
+Calculating eigenvalues by $\det (A-\lambda I)=0$
+\begin{align*}
+    % \det
+    % \left(\begin{array}{ccc}
+    %     1-\lambda & 0 & 3 \\
+    %     8 & 1-\lambda & -1 \\
+    %     5 & 1 & -1-\lambda
+    % \end{array}\right)=(1-\lambda)^3+24++0-15(1-\lambda)+(1-\lambda)-0=0\\
+    \lambda_1, \lambda_2, \lambda_3=-3, 2+\sqrt{7}, 2-\sqrt{7}
+\end{align*}
+Their corresponding eigenvectors are:
+\begin{align*}
+    &v_1\in\left\{\alpha\left(\begin{array}{c} -3/4 \\ 7/4 \\ 1 \end{array}\right) | \alpha\in\F\right\}\\
+    &v_2\in\left\{\beta\left(\begin{array}{c} -(1+\sqrt{7})/2 \\ (3\sqrt{7}+11)/2 \\ 1 \end{array}\right) | \alpha\in\F\right\}\\
+    &v_3\in\left\{\gamma\left(\begin{array}{c} (-1+\sqrt{7})/2 \\ -(3\sqrt{7}-11)/2 \\ 1 \end{array}\right) | \alpha\in\F\right\}
+\end{align*}
+If we find the initial condition as a linear combination of those eigenvectors:
+\begin{align*}
+    \eta=
+    \left(\begin{array}{c} 0 \\ -2 \\ -7 \end{array}\right)
+    =
+    \alpha\left(\begin{array}{c} -3/4 \\ 7/4 \\ 1 \end{array}\right)
+    +
+    \beta\left(\begin{array}{c} -(1+\sqrt{7})/2 \\ (3\sqrt{7}+11)/2 \\ 1 \end{array}\right)
+    +
+    \gamma\left(\begin{array}{c} (-1+\sqrt{7})/2 \\ -(3\sqrt{7}-11)/2 \\ 1 \end{array}\right)
+\end{align*}
+then $\alpha, \beta, \gamma$ are known.\\
+Since there are 3 distinct eigenvalues, fundamental matrix will be collection of these 3 columns:
+\begin{align*}
+    \phi_1(t)&=e^{-3t}\alpha\left(\begin{array}{c} -3/4 \\ 7/4 \\ 1 \end{array}\right)\\
+    \phi_2(t)&=e^{(2+\sqrt{7})t}\beta\left(\begin{array}{c} -(1+\sqrt{7})/2 \\ (3\sqrt{7}+11)/2 \\ 1 \end{array}\right)\\
+    \phi_3(t)&=e^{(2-\sqrt{7})t}\gamma\left(\begin{array}{c} (-1+\sqrt{7})/2 \\ -(3\sqrt{7}-11)/2 \\ 1 \end{array}\right)
+\end{align*}
+\vskip1mm\hrule
+\subsubsection*{Exercise 2.5.16}
+\begin{align*}
+    (A-I)^2v=
+    \left(\begin{array}{cccc}
+        2 & -1 & -4 & 2 \\
+        2 & 2 & -2 & -4\\
+        2 & -1 & -4 & 2\\
+        1 & 2 & -1 & -4
+    \end{array}\right)^2
+    \left(\begin{array}{c} \alpha \\ \beta \\ \gamma \\ \zeta \end{array}\right)
+    =
+    \left(\begin{array}{cccc}
+        -4 & 4 & 8 & -8 \\
+        0 & -4 & 0 & 8\\
+        -4 & 4 & 8 & -8\\
+        0 & -4 & 0 & 8
+    \end{array}\right)
+    \left(\begin{array}{c} \alpha \\ \beta \\ \gamma \\ \zeta \end{array}\right)=0
+\end{align*}
+solving above shows that $v$ has the form of $\left(\begin{array}{c} 2\gamma \\ 2\zeta \\ \gamma \\ \zeta \end{array}\right)$. 
+\begin{align*}
+    (A-I)^2w=
+    \left(\begin{array}{cccc}
+        4 & -1 & -4 & 2 \\
+        2 & 4 & -2 & -4\\
+        2 & -1 & -2 & 2\\
+        1 & 2 & -1 & -2
+    \end{array}\right)^2
+    \left(\begin{array}{c} \alpha \\ \beta \\ \gamma \\ \zeta \end{array}\right)
+    =
+    \left(\begin{array}{cccc}
+        8 & 0 & -8 & 0 \\
+        8 & 8 & -8 & -8\\
+        4 & 0 & -4 & 0\\
+        4 & 4 & -4 & -4
+    \end{array}\right)
+    \left(\begin{array}{c} \alpha \\ \beta \\ \gamma \\ \zeta \end{array}\right)=0
+\end{align*}
+solving above shows that $w$ has the form of $\left(\begin{array}{c} \alpha \\ \beta \\ \alpha \\ \beta \end{array}\right)$.
+
+To find fundamental matrix, we assume a general initial condition and write it as sum of two vectors in the corresponding eigenspaces:
+\begin{align*}
+    \eta=\left(\begin{array}{c} \eta_1 \\ \eta_2 \\ \eta_3 \\ \eta_4 \end{array}\right)=\left(\begin{array}{c} 2(\eta_1-\eta_3) \\ 2(\eta_2-\eta_4) \\ \eta_1-\eta_3 \\ \eta_2-\eta_4 \end{array}\right)
+    +
+    \left(\begin{array}{c} 2\eta_3-\eta_1 \\ 2\eta_4-\eta_2 \\ 2\eta_3-\eta_1 \\ 2\eta_4-\eta_2 \end{array}\right)
+    =
+    v_1+w_1
+\end{align*}
+the solution can be written as
+\begin{align*}
+    \phi(t)&=e^t[I+t(A-I)]v_1+e^{-t}[I+t(A+I)]w_1\\
+    =&e^t\left(\begin{array}{cccc}
+        1+2t & -t & -4t & 2t \\
+        2t & 1+2t & -2t & -4t\\
+        2t & -t & 1-4t & 2t\\
+        1t & 2t & -t & 1-4t
+    \end{array}\right)\left(\begin{array}{c} 2(\eta_1-\eta_3) \\ 2(\eta_2-\eta_4) \\ \eta_1-\eta_3 \\ \eta_2-\eta_4 \end{array}\right)\\
+    &+e^{-t}\left(\begin{array}{cccc}
+        1+4t & -t & -4t & 2t \\
+        2t & 1+4t & -2t & -4t\\
+        2t & -t & 1-2t & 2t\\
+        t & 2t & -t & 1-2t
+    \end{array}\right)\left(\begin{array}{c} 2\eta_3-\eta_1 \\ 2\eta_4-\eta_2 \\ 2\eta_3-\eta_1 \\ 2\eta_4-\eta_2 \end{array}\right)
+    \tag{$*$}
+\end{align*}
+By letting only one of $\eta_i=1$ at each time, we can find 4 set of solutions $\phi_1(t), \phi_2(t), \phi_3(t), \phi_4(t)$. Putting them together as columns will give us the fundamental matrix ($e^{tA}$) such that $\Phi(0)=I$, as
+\begin{align*}
+    \Phi(t)=\left(\begin{array}{cccc}
+        2e^t-e^{-t} & -te^{-t} & -2e^t+2e^{-t} & 2te^{-t} \\
+        2te^t & 2e^t-e^{-t} & -2te^t & -2e^t+2e^{-t}\\
+        e^t-e^{-t} & -te^{-t} & -e^t+2e^{-t} & 2te^{-t}\\
+        te^t & e^t-e^{-t} & -te^t & -e^t+2e^{-t}
+    \end{array}\right)
+\end{align*}
+A particular solution which satisfies $\eta=\left(\begin{array}{c} 1 \\ 0 \\ -1 \\ 0 \end{array}\right)$ will be calculated from Eq. ($*$):
+\begin{align*}
+    \phi(t)=\left(\begin{array}{c} 4e^t-3e^{-t} \\ 4te^t \\ 2e^t-3e^{-t} \\ 2te^t \end{array}\right)
+\end{align*}
+% \begin{align*}
+%     \eta=\left(\begin{array}{c} 1 \\ 0 \\ -1 \\ 0 \end{array}\right)=\left(\begin{array}{c} 4 \\ 0 \\ 2 \\ 0 \end{array}\right)+\left(\begin{array}{c} -3 \\ 0 \\ -3 \\ 0 \end{array}\right)
+% \end{align*}
+\vskip1mm\hrule
+\subsubsection*{Exercise 2.5.17}
+First considering the homogeneous system:
+\begin{align*}
+    A=
+    \left(\begin{array}{cc}
+        1 & 1 \\
+        2 & 0 \\
+    \end{array}\right)
+\end{align*}
+Eigenvalues are $\lambda_1=-1$ and $\lambda_2=2$, with corresponding eigenvectors $v_1=\left(\begin{array}{c}-1\\2\end{array}\right)$ and $v_2=\left(\begin{array}{c}1\\1\end{array}\right)$. Then a fundamental matrix will be:
+\begin{align*}
+    \Phi(t)=
+    \left(\begin{array}{cc}
+        -e^{-t} & e^{2t} \\
+        2e^{-t} & e^{2t}
+    \end{array}\right)
+\end{align*}
+A solution satisfying the initial condition as in $\eta=\left(\begin{array}{c}1\\1\end{array}\right)=0v_1+v_2$, will be:
+\begin{align*}
+    \phi_h(t)=\Phi(t)\left(\begin{array}{c}0\\1\end{array}\right)
+\end{align*}
+Then to find the solution of the non-homogeneous part:
+\begin{align*}
+    \psi(t)&=\Phi(t)\int_0^t
+    \frac{-e^{-s}}{3}\left(\begin{array}{cc}
+        e^{2s} & -e^{2s} \\
+        -2e^{-s} & -e^{-s}
+    \end{array}\right)
+    \left(\begin{array}{c}\sin s\\\cos s\end{array}\right)\diff s\\
+    &=\frac{1}{3}\Phi(t)\int_0^t
+    \left(\begin{array}{c}
+        -e^{s}\sin s+e^{s}\cos s\\
+        2e^{-2s}\sin s+e^{-2s}\cos s
+    \end{array}\right)\diff s\\
+    &=\frac{1}{3}\Phi(t)
+    \left(\begin{array}{c}
+        e^{t}\cos t -1\\
+        -e^{-2t}\cos t+1
+    \end{array}\right)
+\end{align*}
+
+Then the solution is:
+\begin{align*}
+    \phi(t)=\phi_h(t)+\psi(t)
+\end{align*}
+
+\vskip1mm\hrule
+\subsubsection*{Exercise 2.5.18}
+Let $y_1=y$ and $y_2=y'$, then $y_2=y_1'$ and $y_2'=y''$. Then we have $y_2'=-py_2-qy_1=0$ as in:
+\begin{align*}
+    \left(\begin{array}{c}
+        y_1' \\
+        y_2'
+    \end{array}\right)
+    =
+    \left(\begin{array}{cc}
+        0 & 1 \\
+        -q & -p 
+    \end{array}\right)
+    \left(\begin{array}{c}
+        y_1 \\
+        y_2
+    \end{array}\right)
+\end{align*}
+Eigenvalues are $\lambda_{1,2}=\frac{-p\pm\sqrt{p^2-4q}}{2}$.
+\vskip1mm\hrule
+\subsubsection*{Exercise 2.5.19}
+Existence of 2 distinct eigenvalues gives us directly the fundamental matrix:
+\begin{align*}
+    \Phi(t)=\left(\begin{array}{cc}
+        e^{\lambda_1t}\left[\begin{array}{c}
+        v_1 \\
+        v_2
+        \end{array}\right] &, e^{\lambda_2t}\left[\begin{array}{c}
+        w_1 \\
+        w_2
+        \end{array}\right] \\
+    \end{array}\right)
+\end{align*}
+\vskip1mm\hrule
+\subsubsection*{Exercise 2.5.20}
+$\lambda=-p/2$ with multiplicity 2. Then the solution and fundamental matrix are as follows:
+\begin{align*}
+    \phi(t)&=e^{-pt/2}[I+t(A+\frac{p}{2}I)]\eta\\
+    &=e^{-pt/2}\left(\begin{array}{cc}
+        1+\frac{p}{2}t & t \\
+        -\frac{p^2}{4}t & 1-\frac{p}{2}t 
+    \end{array}\right)\eta\\
+    &=\Phi(t)\eta
+\end{align*}
+where the last line is true since $\eta$ is any vector in $\mathbb{F}^2$.\\
+The general solution for $y''+py'+q=0$ is linear combination of the first row of fundamental matrix:
+\begin{align*}
+    \rho(t)=\alpha e^{-pt/2}(1+\frac{p}{2}t)+\beta e^{-pt/2}t
+\end{align*}
+\vskip1mm\hrule
+
+\subsubsection*{Exercise 2.5.24}
+\begin{align*}
+    A^2&=
+    \left(\begin{array}{cc}
+        0 & 1 \\
+        -1 & 0 \\
+    \end{array}\right)
+    \left(\begin{array}{cc}
+        0 & 1 \\
+        -1 & 0 \\
+    \end{array}\right)=
+    \left(\begin{array}{cc}
+        -1 & 0 \\
+        0 & -1 \\
+    \end{array}\right)=-I\\
+    A^3&=A^2A=(-I)A=-A\\
+    A^4&=A^2A^2=I
+\end{align*}
+Therefore:
+\begin{align*}
+A^m=
+    \begin{cases}
+        (-1)^{m/2}I & \text{if m is even}\\
+        (-1)^{\lfloor m/2\rfloor}A & \text{if m is odd} 
+    \end{cases}
+\end{align*}
+\vskip1mm\hrule
+\subsubsection*{Exercise 2.5.25}
+\begin{align*}
+    e^{tA}&=I + \sum_{m=1}^\infty\frac{t^m}{m!}A^m\\
+    &=I + \sum_{n=1}^\infty\frac{t^{2n}}{(2n)!}A^{2n} + \sum_{n=1}^\infty\frac{t^{2n+1}}{(2n+1)!}A^{2n+1}\\
+    &=I+\sum_{n=1}^\infty\frac{t^{2n}(-1)^n}{(2n)!}I + \sum_{n=0}^\infty\frac{t^{2n+1}(-1)^n}{(2n+1)!}A\\
+    &=\left(\sum_{n=0}^\infty\frac{t^{2n}(-1)^n}{(2n)!}\right)I + \left(\sum_{n=0}^\infty\frac{t^{2n+1}(-1)^n}{(2n+1)!}\right)A\\
+    &=\cos t I + \sin t A\\
+    &=\left(\begin{array}{cc}
+        \cos t & 0 \\
+        0 & \cos t \\
+    \end{array}\right)+
+    \left(\begin{array}{cc}
+        0 & \sin t \\
+        -\sin t & 0 \\
+    \end{array}\right)\\
+    &=\left(\begin{array}{cc}
+        \cos t & \sin t \\
+        -\sin t & \cos t \\
+    \end{array}\right)
+\end{align*}
+\vskip1mm\hrule
+\subsubsection*{Exercise 2.5.27}
+Let $y_1=y$ and $y_2=y'$, then $y_2=y_1'$ and $y_2'=y''$.
+\begin{align*}
+    \left(\begin{array}{c}
+        y_1' \\
+        y_2'
+    \end{array}\right)
+    =
+    \underbrace{\left(\begin{array}{cc}
+        0 & 1 \\
+        -1 & 0 
+    \end{array}\right)}_{A}
+    \left(\begin{array}{c}
+        y_1 \\
+        y_2
+    \end{array}\right)
+    +
+    \left(\begin{array}{c}
+        0 \\
+        f(t)
+    \end{array}\right)
+\end{align*}
+A fundamental matrix for the homogeneous system is $e^{tA}$, which from \textbf{Exercise 2.5.24-25} we have:
+\begin{align*}
+    \Phi(t)=e^{tA}=\left(\begin{array}{cc}
+        \cos t & \sin t \\
+        -\sin t & \cos t \\
+    \end{array}\right)
+\end{align*}
+therefore
+\begin{align*}
+    \phi_h(t)=\Phi(t-t_0)\eta
+\end{align*}
+Then to find the solution of the non-homogeneous part:
+\begin{align*}
+    \psi(t)&=\Phi(t)\int_{t_0}^t
+    \left(\begin{array}{cc}
+        \cos s & -\sin s \\
+        \sin s & \cos s \\
+    \end{array}\right)
+    \left(\begin{array}{c}0\\f(s)\end{array}\right)\diff s\\
+    &=\left(\begin{array}{cc}
+        \cos t & \sin t \\
+        -\sin t & \cos t \\
+    \end{array}\right)
+    \left(\begin{array}{c}
+        \int_{t_0}^t-f(s)\sin s\diff s\\
+        \int_{t_0}^tf(s)\cos s\diff s
+    \end{array}\right)\\
+    &=
+    \left(\begin{array}{c}
+        \int_{t_0}^tf(s)\sin(t-s)\diff s\\
+        \int_{t_0}^tf(s)\cos(t-s)\diff s
+    \end{array}\right)
+\end{align*}
+
+Then the solution is:
+\begin{align*}
+    \phi(t)=\phi_h(t)+\psi(t)
+\end{align*}
+
+\vskip1mm\hrule
+
+\clearpage
+
+\section*{2.6 Similarity of Matrices and the Jordan Canonical Form \xrfill[2pt]{3pt}[blue]}
+
+\subsubsection*{Exercise 2.6.5}
+Eigenvalues:
+\begin{align*}
+    (1-\lambda)(-\lambda)-2=0\\
+    \lambda_1,\lambda_2=2, -1
+\end{align*}
+To find transformation matrix:
+\begin{align*}
+    \left(\begin{array}{cc}
+        1 & 1 \\
+        2 & 0 \\
+    \end{array}\right)
+    \left(\begin{array}{cc}
+        t_{11} & t_{12} \\
+        t_{21} & t_{22} \\
+    \end{array}\right)
+    &=
+    \left(\begin{array}{cc}
+        t_{11} & t_{12} \\
+        t_{21} & t_{22} \\
+    \end{array}\right)
+    \left(\begin{array}{cc}
+        2 & 0 \\
+        0 & -1 \\
+    \end{array}\right)\\
+    \left(\begin{array}{cc}
+        t_{11}+t_{21} & t_{12}+t_{22} \\
+        2t_{11} & 2t_{12} \\
+    \end{array}\right)
+    &=
+    \left(\begin{array}{cc}
+        2t_{11} & -t_{12} \\
+        2t_{21} & -t_{22} \\
+    \end{array}\right)
+\end{align*}
+Then $T=\left(\begin{array}{cc} 1 & 1 \\ 1 & -2 \\ \end{array}\right)$.
+\vskip1mm\hrule
+
+\subsubsection*{Exercise 2.6.6}
+\begin{align*}
+    T^{-1}AT
+    &=\frac{-1}{3}\left(\begin{array}{cc} 
+    -2 & -1 \\ -1 & 1 \\ 
+    \end{array}\right)
+    \left(\begin{array}{cc} 
+    1 & 1 \\ 2 & 0 \\ 
+    \end{array}\right)
+    \left(\begin{array}{cc} 
+    1 & 1 \\ 1 & -2 \\ 
+    \end{array}\right)\\
+    &=\frac{-1}{3}\left(\begin{array}{cc} 
+    -2 & -1 \\ -1 & 1 \\ 
+    \end{array}\right)
+    \left(\begin{array}{cc} 
+    2 & -1 \\ 2 & 2 \\ 
+    \end{array}\right)\\
+    &=\frac{-1}{3}\left(\begin{array}{cc} 
+    -6 & 0 \\ 0 & 3 \\ 
+    \end{array}\right)\\
+    &=\left(\begin{array}{cc}
+        2 & 0 \\
+        0 & -1 \\
+    \end{array}\right)
+\end{align*}
+\vskip1mm\hrule
+
+\subsubsection*{Exercise 2.6.7}
+Since left hand side of $e^{tA}T=Te^{tJ}$ is a fundamental matrix, then $Te^{tJ}$ also forms a fundamental matrix. Therefore
+\begin{align*}
+    \Phi(t)=Te^{tJ}=\left(\begin{array}{cc} 
+    1 & 1 \\ 1 & -2 \\ 
+    \end{array}\right)
+    \left(\begin{array}{cc}
+        e^{2t} & 0 \\
+        0 & e^{-t} \\
+    \end{array}\right)
+    =
+    \left(\begin{array}{cc}
+        e^{2t} & e^{-t} \\
+        e^{2t} & -2e^{-t} \\
+    \end{array}\right)
+\end{align*}
+\vskip1mm\hrule
+\clearpage
+
+\end{document}
+
